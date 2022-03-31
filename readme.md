@@ -10,7 +10,7 @@ To see the result check view the pack information for the standard pack or use [
 4. Move it to "Super Auto Pets\BepInEx\plugins\"
 
 ## Development
-If you want to continue working on this project make sure to check the project file and set the GameDir property to the root directory of your Super Auto Pets installation.
+If you want to continue working on this project make sure to check the [project file](https://github.com/Zeprus/sap_custom_pet_example/blob/master/super_custom_pets.csproj) and set the GameDir property to the root directory of your Super Auto Pets installation.
 
 Build the project with 'dotnet publish' for automatic deployment.
 
