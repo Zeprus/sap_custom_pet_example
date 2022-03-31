@@ -9,6 +9,8 @@ namespace Zeprus.Sap {
         
         private static BepInEx.Logging.ManualLogSource log;
         static MinionEnum petRockEnum;
+        static MinionTemplate petRockTemplate;
+        static MinionAsset petRockAsset;
         
         public CustomPetLoader(IntPtr ptr) : base(ptr) {
             log = BepInExLoader.log;
@@ -25,8 +27,9 @@ namespace Zeprus.Sap {
 
         static MinionTemplate createPetRockTemplate(MinionEnum minionEnum) {
             // create a MinionTemplate for our pet, this contains the pets attributes
-            MinionTemplate petRockTemplate = new MinionTemplate(minionEnum);
+            petRockTemplate = new MinionTemplate(minionEnum);
 
+            // set fields
             petRockTemplate.SetName("Pet Rock");
             petRockTemplate.SetAbout("Your only true friend.");
             petRockTemplate.SetStats(1, 50);
@@ -47,6 +50,20 @@ namespace Zeprus.Sap {
             return petRockTemplate;
         }
 
+        static MinionAsset createPetRockAsset(MinionEnum minionEnum) {
+                    // create MinionAsset
+                    MinionAsset minionAsset = ScriptableObject.CreateInstance<MinionAsset>();
+
+                    // set fields
+                    minionAsset.Name = "Pet Rock";
+                    minionAsset.Enum = CustomPetLoader.petRockEnum;
+                    // minionAsset.Sprite = some Sprite
+                    // minionAsset.Sprite2x = some Sprite
+                    // minionAsset.Animation = some UnityEngine.AnimationClip
+
+                    return minionAsset;
+        }
+
         [HarmonyPatch]
         class MinionEnumHooks {
             // Early hook to add the pet to a pack and get it initialized, there's a probably a better way
@@ -64,18 +81,8 @@ namespace Zeprus.Sap {
             public static bool prefixGet(MinionEnum value, ref MinionAsset __result) {
                 // check if requested Assets are for our pet
                 if(value == CustomPetLoader.petRockEnum) {
-                    // create MinionAsset
-                    MinionAsset minionAsset = ScriptableObject.CreateInstance<MinionAsset>();
-                    // set fields
-                    minionAsset.Name = "Pet Rock";
-                    minionAsset.Enum = CustomPetLoader.petRockEnum;
-                    // minionAsset.Sprite = some Sprite
-                    // minionAsset.Sprite2x = some Sprite
-                    // minionAsset.Animation = some UnityEngine.AnimationClip
-
                     // set return to our created MinionAsset
-                    __result = minionAsset;
-
+                    __result = petRockAsset;
                     // prevent executing the regular MinionLibrary.Get function to avoid errors
                     return false;
                 } else {
