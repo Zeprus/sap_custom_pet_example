@@ -3,9 +3,10 @@ using UnhollowerRuntimeLib;
 using UnityEngine;
 using HarmonyLib;
 
-namespace Zeprus.Sap {
+namespace Zeprus.Example {
     [BepInPlugin("com.zeprus.sap_custom_pet_example", "SAP Custom Pet Example", "1.0")]
     [BepInProcess("Super Auto Pets.exe")]
+    [BepInDependency("com.zeprus.sap_custom_pet_manager")]
     public class BepInExLoader : BepInEx.IL2CPP.BasePlugin {
 
         public const string
@@ -32,9 +33,10 @@ namespace Zeprus.Sap {
             log.LogMessage(GUID + ": Registering...");
             
             try {
-                var gameObject = new GameObject("CustomPetLoader");
-                ClassInjector.RegisterTypeInIl2Cpp<CustomPetLoader>();;
-                gameObject.AddComponent<CustomPetLoader>();
+                var gameObject = new GameObject("CustomPetExample");
+                ClassInjector.RegisterTypeInIl2Cpp<PetRockExample>();;
+                gameObject.AddComponent<PetRockExample>();
+
 
                 log.LogMessage(GUID + ": Finished registering.");
             } catch {
