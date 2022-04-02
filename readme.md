@@ -6,7 +6,7 @@ To see the result check view the pack information for the standard pack or use [
 ## Installation
 1. Download the latest BepInEx Build from [here](https://builds.bepis.io/projects/bepinex_be).
 2. Follow the installation instructions for Il2Cpp Unity [here](https://docs.bepinex.dev/master/articles/user_guide/installation/unity_il2cpp.html).
-3. Install the [custom pet manager library](https://github.com/Zeprus/sap_custom_pet_manager).
+3. Install the **matching version** of the [custom pet manager library](https://github.com/Zeprus/sap_custom_pet_manager).
 4. Download the latest release.
 5. Move it to "Super Auto Pets\BepInEx\plugins\"
 
